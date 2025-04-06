@@ -1,143 +1,112 @@
-# TITANIC SURVIVAL PREDICTION USING DECISION TREES AND RANDOM FORESTS (FROM SCRATCH)
+# 🌊 Titanic Survival Prediction using Decision Tree and Random Forest (From Scratch)
 
-## 📌 Overview
+This project implements **Decision Tree** and **Random Forest** classifiers **from scratch** using the famous **Titanic Dataset** from Kaggle. It’s fully contained in a **single Colab Notebook**, and does not rely on external ML libraries like `scikit-learn` for the modeling part.
+
+---
+
+## 🚀 Overview
+
+- Load & preprocess Titanic dataset
+- Perform visualizations (e.g., survival by sex and class)
+- Implement a Decision Tree classifier from scratch
+- Implement a Random Forest classifier using multiple Decision Trees
+- Evaluate model performance
+
+---
+
+## 🧠 Algorithms Implemented
+
+### ✅ Decision Tree (From Scratch)
+
+- Select best feature based on Information Gain
+- Use recursive splitting with max depth and min samples
+- Use Entropy for impurity
+- Leaf node is based on most common label
+
+### 🌲 Random Forest (From Scratch)
+
+- Build multiple Decision Trees using bootstrapped samples
+- Random feature selection per split
+- Final prediction is based on majority voting
+
+---
+
+## 📁 Project Structure
+
 ```sh
-This project demonstrates how to build and train Decision Tree and Random Forest classifiers from scratch in Python without using sklearn. We apply these models on the Titanic dataset from Kaggle to predict passenger survival.
+├── Titanic_Model_From_Scratch.ipynb   
+└── README.md                         
 ```
 
-## 📁 Dataset
+---
+
+## 📦 Dependencies
+
 ```sh
-We use the Titanic dataset from Kaggle:
-- train.csv — contains labeled data to train the model
-- test.csv — used to test predictions after training
+- Python 3.8+
+- NumPy
+- Pandas
+- Matplotlib
+- collections.Counter (built-in)
 ```
 
-## ⚙️ Requirements
+> All libraries are standard and already available in Google Colab.
+
+---
+
+## 📊 Visualizations Included
+
 ```sh
-- Python 3.6+
-- numpy
-- pandas
-- matplotlib
-- collections
+- Bar plots: Survival Rate by Passenger Class
+- Pie charts: Male vs Female survival percentages
 ```
 
-## 🛠️ Installation
-```sh
-# 1. Clone the repository
-git clone https://github.com/your-username/titanic-ml-from-scratch.git
-cd titanic-ml-from-scratch
+---
 
-# 2. (Optional) Create and activate a virtual environment
-python -m venv venv
-source venv/bin/activate        # Linux/macOS
-venv\Scripts\activate           # Windows
+## 🔍 Sample Code Snippets
 
-# 3. Install dependencies
-pip install -r requirements.txt
+### 🧼 Preprocessing
+
+```python
+X = pd.get_dummies(train[features])
+X_test = pd.get_dummies(test[features])
+y = train["Survived"]
 ```
 
-## 🧠 Models Implemented
-### Decision Tree
-```sh
-- Calculates entropy and information gain to split nodes
-- Stops splitting based on max depth or minimum samples
-- Uses recursion to grow the tree
+### 🌳 Training a Random Forest
+
+```python
+forest = RandomForest(n_trees=10, max_depth=10)
+forest.fit(X_train.to_numpy(), y_train.to_numpy())
+predictions = forest.predict(X_test.to_numpy())
 ```
 
-### Random Forest
-```sh
-- Builds multiple decision trees on bootstrapped samples
-- Uses random feature selection for each tree
-- Combines predictions using majority voting
-```
+---
 
-## 📊 Visualizations
-```sh
-- Survival Rate by Gender
-- Survival Rate by Passenger Class
-- Pie charts showing survival distribution
-- Bar plots for class-based survival
+## 📈 Results
 
-These are useful for EDA and choosing meaningful features.
-```
+After training and testing:
 
-## 🧪 Key Functions
+- The custom Random Forest performs reasonably well
+- Visualizations reveal survival patterns (e.g., higher for women and 1st class)
 
-### Entropy Function
-```sh
-Calculates entropy of a target variable:
-entropy = -Σ p * log2(p)
-```
+---
 
-### Information Gain
-```sh
-Measures reduction in entropy after a split.
-IG = entropy(parent) - [weighted entropy(left) + weighted entropy(right)]
-```
+## 📌 Notes
 
-### Data Preparation
-```sh
-- Uses pd.get_dummies to encode categorical variables
-- Splits data into training and testing using custom function
-```
+- The models are built without `sklearn`
+- This is meant to help understand how trees and forests work internally
+- Can be extended to include Gini index or pruning techniques
 
-### Tree Building
-```sh
-- Recursively split based on best info gain
-- Create leaf node if stopping condition is met
-```
+---
 
-### Random Forest
-```sh
-- Fit multiple trees using bootstrapped samples
-- Each tree trained with random subset of features
-- Final prediction: majority vote across trees
-```
+## 🧑‍💻 Author
 
-## 📂 Project Structure
-```sh
-├── train.csv                # Training dataset from Kaggle
-├── test.csv                 # Test dataset from Kaggle
-├── main.py                  # Main driver code
-├── decision_tree.py         # Decision Tree class implementation
-├── random_forest.py         # Random Forest class using multiple trees
-├── preprocessing.py         # Data cleaning and transformation
-├── visualizations.py        # Plotting survival rates and distributions
-├── utils.py                 # Helper functions
-└── README.md                # This file
-```
+Built with ❤️ by a Titanic-obsessed ML learner!
 
-## ▶️ How to Run
-```sh
-# Run the main script to start training and prediction
-python main.py
-```
+---
 
-## ✅ Sample Output
-```sh
-Training Decision Tree...
-Accuracy on validation set: 80.5%
+## 📎 References
 
-Training Random Forest with 10 trees...
-Accuracy on validation set: 85.2%
-```
-
-## 🔍 Future Improvements
-```sh
-- Add support for Gini Impurity
-- Include pruning strategies
-- Cross-validation
-- ROC-AUC and F1-score metrics
-- Model saving/loading with pickle
-```
-
-## 🙌 Acknowledgements
-```sh
-- Kaggle for the Titanic dataset
-- Blogs and resources that explain ML algorithms from scratch
-```
-
-## 🪪 License
-```sh
-This project is licensed under the MIT License.
-```
+- [Kaggle Titanic Dataset](https://www.kaggle.com/c/titanic)
+- Machine Learning theory from scratch
